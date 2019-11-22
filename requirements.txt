@@ -1,0 +1,4 @@
+tensorboardX
+scipy
+ipython
+networkx
