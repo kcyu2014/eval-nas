@@ -1,10 +1,11 @@
-# Evaluating the search phase of neural architecture search - CNN 
+# Evaluating the search phase of neural architecture search
+> Code in early release and may subject to change. Please feel free to open an issue in case of questions.
 
 
 ### Overview
 
 The code base captures the framework we propose to test the autoML algorithms with a single run. 
-Currently we only tested on RNN search due to the limited resources and time, 
+Currently we only tested on CNN search due to the limited resources and time, 
 but ideally the code should work for both CNN and RNN.
 
 ![Framework](assets/framework.png)
@@ -12,9 +13,6 @@ As depicted in the figure, our framework first let each algorithm run in their o
 Then, differs from the previous approach, only demonstrate the performance on downstream task (b), we 
 explicitly sample a random architecture and compare to it in the same condition. All previous steps are repeated for at 
 least 10 times for different random seeds.
-
-## CNN Search space experiments.
-Please goes to folder `cnn`.
 
 ### Requirements
 
@@ -102,8 +100,8 @@ python train_cifar.py  \
 ```
 
 
-### Tests on NASBench-101 search space.
-We are the first to test weight sharing on NASBench-101 search space. The rationale is the same as before, share the 
+# Tests on NASBench-101 search space.
+We are among the first to test weight sharing on NASBench-101 search space. The rationale is the same as before, share the 
 weights matrices of convolutional and fully-connected layers among all possible architectures.  
 
 - To use, you need to download the NASbench dataset and put them under this folder `data/nasbench`. 
@@ -111,7 +109,7 @@ weights matrices of convolutional and fully-connected layers among all possible 
     - Reference: [GitHub: NASbench-101](https://github.com/google-research/nasbench)
 
 
-#### Search phase
+### Search phase
 Replacing the search-space from `original` to `nasbench` to enable search there.
 __Make sure you configure SLURM server as requested.__
 
@@ -120,11 +118,11 @@ __Make sure you configure SLURM server as requested.__
 - To run the sampler based algorithms, ENAS, NAO, DARTS, FBNet, run \
 `bash scripts/nasbench-sampler-search.sh search`
 
-#### From scratch
+### From scratch
 There is no need, since all possible architecture ground-truth architectures are stored directly.
 
 
-## Background and our goal
+# Background and our goal
 Neural Architecture Search (NAS) aims to facilitate the design of deep networks for new tasks. To this end, existing techniques rely on two stages: searching over the architecture space and validating the best architecture. Evaluating NAS algorithms is currently solely done by comparing their results on the downstream task. While intuitive, this fails to explicitly evaluate the effectiveness of their search strategies.
 
 In this paper, we extend the NAS evaluation procedure to include the search phase. 
